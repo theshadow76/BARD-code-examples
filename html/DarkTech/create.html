@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Page Creator</title>
+    <style>
+        .container {
+        display: flex;
+        flex-direction: row;
+        }
+
+        .side-panel {
+        width: 20%;
+        height: 100vh; /* full viewport height */
+        overflow-y: auto; /* add a scrollbar if the content is too tall */
+        }
+
+        /* Add styles to the heading editor */
+        .heading-editor {
+            margin-bottom: 20px;
+        }
+
+        .heading-editor label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .heading-editor input[type="text"],
+        .heading-editor select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        /* Add styles to the button editor */
+        .button-editor {
+            margin-bottom: 20px;
+        }
+
+        .button-editor label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .button-editor input[type="text"],
+        .button-editor select {
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 10px;
+        }
+
+        .button-editor button {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        /* Add styles to the basic toolbox */
+        .basic-toolbox {
+            margin-bottom: 20px;
+        }
+
+        .basic-toolbox h2 {
+            margin-bottom: 10px;
+        }
+
+        .basic-toolbox ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .basic-toolbox li {
+            margin-bottom: 5px;
+        }
+
+        .basic-toolbox a {
+            display: block;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        /* Add styles to the advanced toolbox */
+        .advanced-toolbox {
+            margin-bottom: 20px;
+        }
+
+        .advanced-toolbox h2 {
+            margin-bottom: 10px;
+        }
+
+        .advanced-toolbox ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .advanced-toolbox li {
+            margin-bottom: 5px;
+        }
+
+        /* Add styles to the properties */
+        .properties {
+            margin-bottom: 20px;
+        }
+
+        .properties label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .properties textarea {
+            width: 100%;
+            height: 100px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            resize: none;
+        }
+
+        /* Add styles to the editor */
+        .editor {
+            margin-bottom: 20px;
+        }
+
+        .editor #canvas {
+            width: 100%;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .editor textarea {
+            width: 100%;
+            height: 200px;
+            padding: 5px;
+            border-radius: 5px;
+            border: none;
+            background-color: #fff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            resize: none;
+            margin-bottom: 10px;
+        }
+
+        .editor button[type="submit"] {
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            color: #fff;
+            background-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            cursor: pointer;
+        }
+
+        .editor,
+        #page-editor {
+        width: 80%;
+        height: 100vh;
+        overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="side-panel">
+            <!-- Heading Editor -->
+            <div class="heading-editor">
+              <!-- Heading Editor Options -->
+              <div>
+                <label>Heading Text:</label>
+                <input type="text" id="heading-text" value="Heading" />
+              </div>
+              <div>
+                <label>Heading Level:</label>
+                <select id="heading-level">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                  <option value="6">6</option>
+                </select>
+              </div>
+              <!-- Heading Preview -->
+              <h1 id="heading-preview">Heading</h1>
+            </div>
+          
+             <!-- Button Editor -->
+     <!-- Button Editor -->
+    <div class="button-editor">
+        <div class="preview">
+          <button id="button-preview">Button</button>
+        </div>
+        <!-- Button Editor Options -->
+        <div class="button-editor-options"> <!-- Added class -->
+          <div>
+            <label>Button Text:</label>
+            <input type="text" id="button-text" value="Button" />
+          </div>
+          <div>
+            <label>Button Background Color:</label>
+            <input type="color" id="button-background-color" value="#ff0000" />
+          </div>
+          <div>
+            <label>Button Border:</label>
+            <input type="text" id="button-border" value="1px solid black" />
+          </div>
+          <div>
+            <label>Button Size:</label>
+            <select id="button-size">
+              <option value="small">Small</option>
+              <option value="medium">Medium</option>
+              <option value="large">Large</option>
+            </select>
+          </div>
+        </div>
+      </div>
+          
+            <!-- Basic Toolbox -->
+            <div class="basic-toolbox">
+              <h2>Basic Toolbox</h2>
+              <ul>
+                {% for element in basic_elements %}
+                <li><a href="#" data-element="{{ element.value|e }}">{{ element.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
+          
+            <!-- Advanced Toolbox -->
+            <div class="advanced-toolbox">
+              <h2>Advanced Toolbox</h2>
+              <ul>
+                {% for template in advanced_templates %}
+                <li>{{ template|safe }}</li>
+                {% endfor %}
+              </ul>
+            </div>
+          
+            <!-- Properties -->
+            <div class="properties">
+              <label for="css_properties">CSS Properties:</label>
+              <textarea name="css_properties"></textarea>
+            </div>
+          </div>
+
+          
+          <h2>Page Editor</h2>
+          <div id="page-editor"></div>
+    </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.min.js"></script>
+    <script>
+// Make the list elements draggable
+$('ul li a').draggable({
+    helper: 'clone'
+});
+
+// Specify the page editor as the drop target for the draggable elements
+$('#page-editor').droppable({
+    accept: 'ul li a',
+    drop: function(event, ui) {
+        var element = ui.draggable.data('element');
+        var left = ui.offset.left - $(this).offset().left;
+        var top = ui.offset.top - $(this).offset().top;
+        var html = '<div class="draggable" style="position: absolute; left: ' + left + 'px; top: ' + top + 'px;">' + element + '</div>';
+        $(this).append(html);
+
+        // Make the dropped element draggable
+        $(this).children('.draggable').draggable({
+            containment: 'parent'
+        });
+
+        // Add an edit button to the dropped element
+        var editButton = $('<button class="edit-button">Edit</button>');
+        editButton.css({
+            position: 'absolute',
+            right: 0,
+            bottom: 0,
+            display: 'none'
+        });
+        $(this).children('.draggable').append(editButton);
+
+        // Show the edit button when hovering over the dropped element
+        $(this).children('.draggable').hover(function() {
+            if (!$(this).hasClass('saved')) {
+                $(this).find('.edit-button').show();
+            }
+        }, function() {
+            $(this).find('.edit-button').hide();
+        });
+
+        $('#button-preview').draggable({
+  containment: 'parent'
+});
+
+// Make the page editor droppable
+$('#page-editor').droppable({
+  accept: '#button-preview',
+  drop: function(event, ui) {
+    var left = ui.offset.left - $(this).offset().left;
+    var top = ui.offset.top - $(this).offset().top;
+    var html = '<div class="draggable" style="position: absolute; left: ' + left + 'px; top: ' + top + 'px;">' + ui.draggable.html() + '</div>';
+    $(this).append(html);
+
+    // Make the dropped element draggable
+    $(this).children('.draggable').draggable({
+      containment: 'parent'
+    });
+  }
+});
+
+        // Show a panel with text editing features when the edit button is clicked
+$(this).children('.draggable').find('.edit-button').click(function() {
+    // Create a panel with text editing features
+    var textEditingPanel = $('<div class="text-editing-panel"></div>');
+    textEditingPanel.css({
+        position: 'absolute',
+        left: 0,
+        top: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#fff',
+        zIndex: 1
+    });
+    $(this).parent().append(textEditingPanel);
+
+    // Set the background color of the panel
+    textEditingPanel.css('background-color', '#eee');
+
+    // Add a textarea element to the panel for entering text
+    var textArea = $('<textarea></textarea>');
+    textArea.css({
+        width: '100%',
+        height: '100%',
+        padding: '10px',
+        boxSizing: 'border-box'
+    });
+    textArea.val($(this).parent().text());
+    textEditingPanel.append(textArea);
+
+    // Add a save button to the panel
+    var saveButton = $('<button>Save</button>');
+    saveButton.click(function() {
+        // Update the text of the dropped element with the modified text from the textarea
+        var modifiedText = $(this).parent().find('textarea').val();
+        $(this).closest('.draggable').text(modifiedText);
+
+        // Remove the text editing panel
+        $(this).parent().remove();
+    });
+    textEditingPanel.append(saveButton);
+        });
+    }
+});
+
+// Initialize the page editor
+$('#page-editor').css({
+    position: 'relative',
+    width: '100%',
+    height: '400px',
+    border: '1px solid #ccc',
+    borderRadius: '4px',
+    overflow: 'auto'
+});
+
+ // Get references to the button preview and editor options
+ const buttonPreview = document.querySelector('#button-preview');
+  const buttonText = document.querySelector('#button-text');
+  const buttonBackgroundColor = document.querySelector('#button-background-color');
+  const buttonBorder = document.querySelector('#button-border');
+
+  // Update the button preview when the editor options change
+  buttonText.addEventListener('input', () => {
+    buttonPreview.textContent = buttonText.value;
+  });
+
+  buttonBackgroundColor.addEventListener('input', () => {
+    buttonPreview.style.backgroundColor = buttonBackgroundColor.value;
+  });
+
+  buttonBorder.addEventListener('input', () => {
+    buttonPreview.style.border = buttonBorder.value;
+  });
+   // Get references to the heading preview and editor options
+   const headingPreview = document.querySelector('#heading-preview');
+  const headingText = document.querySelector('#heading-text');
+  const headingLevel = document.querySelector('#heading-level');
+
+  // Update the heading preview when the editor options change
+  headingText.addEventListener('input', () => {
+    headingPreview.textContent = headingText.value;
+  });
+
+  headingLevel.addEventListener('change', () => {
+    const level = headingLevel.value;
+    const tagName = `H${level}`;
+    const newHeading = document.createElement(tagName);
+    newHeading.textContent = headingText.value;
+    headingPreview.replaceWith(newHeading);
+    headingPreview = newHeading;
+  });
+        </script>
+        
+        
+</body>
+</html>
